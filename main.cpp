@@ -8,6 +8,8 @@
 #include <vector>
 
 using namespace std;
+void replaceAll(std::string& str, const std::string& from, const std::string& to);
+
 
 void replaceAll(std::string& str, const std::string& from, const std::string& to) {
     if(from.empty())
