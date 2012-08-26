@@ -166,6 +166,26 @@ public:
         return _maxWorkingTime;
     }
 
+
+    void sortByOrderName(){
+        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+            return a.getOrderName() > b.getOrderName();
+        });
+
+    }
+
+    void sortByWorkstationName(){
+        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+            return a.getWorkstationName() > b.getWorkstationName();
+        });
+    }
+
+    void sortByWorkstationName_AND_OrderName(){
+        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+            return !(a.getOrderName() <= b.getOrderName()) && (a.getStartWorkingTime() >= b.getEndWorkingTime());
+        });
+    }
+
     string graphvizWorkstationOriented(void) {
         string s;
         s+="digraph G {\n";
@@ -586,6 +606,10 @@ int main () {
     */
 
     //traceabilities.image();
+    //traceabilities.sortByOrderName();
+    //traceabilities.sortByWorkstationName();
+    traceabilities.sortByWorkstationName_AND_OrderName();
+    //traceabilities.image_V2();
     traceabilities.image_V2();
 
     return 0;
