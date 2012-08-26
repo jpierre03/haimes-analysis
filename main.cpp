@@ -21,8 +21,7 @@ void replaceAll(std::string& str, const std::string& from, const std::string& to
 
 
 template <class T>
-inline std::string to_string (const T& t)
-{
+inline std::string to_string (const T& t) {
     std::stringstream ss;
     ss << t;
     return ss.str();
@@ -211,7 +210,7 @@ public:
 
             //s+="		"+id+"_Input ->t0\n";
 
-			//M2_input -> M2_StartWorking -> M2_EndWorking -> M2_output;
+            //M2_input -> M2_StartWorking -> M2_EndWorking -> M2_output;
             s+="	}\n";
         }
         // end of digraph
@@ -219,6 +218,99 @@ public:
         s+="}";
         s+="\n";
         return s;
+    }
+
+    void image(void) {
+        const long TIME_LINE_HEIGHT=10;
+        const long V_RATIO=10;
+        const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
+        const long IWidth=(long)maxOutputTime();
+
+        char fData[IHeight][IWidth][3];
+
+        // Init ALL Matrix
+        for (long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                fData[i][j][0]=255;
+                fData[i][j][1]=255;
+                fData[i][j][2]=255;
+            }
+        }
+        // Time Line -- TOP
+        for (long i=0; i<TIME_LINE_HEIGHT; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*255;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+        // Time Line -- Botom
+        for (long i=IHeight-TIME_LINE_HEIGHT; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*255;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+        // Time Line --CROSS
+        for (long i=TIME_LINE_HEIGHT; i<IHeight-TIME_LINE_HEIGHT; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*(255-240)+240;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+
+        long cursor=TIME_LINE_HEIGHT; // on continue juste après la time line
+        // Add traceability informations
+        for (TraceabilityVector::iterator it = begin(); it!=end(); ++it) {
+            //(*it).show();
+            // input
+            for (long i=cursor; i<cursor+V_RATIO; i++) {
+            for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
+                fData[i][j][0]=255; // rouge
+                fData[i][j][1]=0;
+                fData[i][j][2]=0;
+            }
+            // working
+            for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
+                fData[i][j][0]=0;
+                fData[i][j][1]=255; // vert
+                fData[i][j][2]=0;
+            }
+            // output
+            for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
+                fData[i][j][0]=0;
+                fData[i][j][1]=0;
+                fData[i][j][2]=0;
+            }
+            }
+            cursor+=V_RATIO;
+        }
+
+        ofstream output("/home/jpierre03/nonRSync/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/traceabilities.ppm", ios::binary|ios::out);
+        if(!output) {
+            cout << "unable to open the output file "<< "d.ppm" << endl;
+        } else {
+            output << "P6"<< endl <<"# foreground "<<endl;
+            //output << itoa(IWidth, strtemp, 10);
+            output << IWidth;
+            output << " ";
+            //output << itoa(IHeight, strtemp, 10);
+            output << IHeight;
+            output << endl;
+            //output << itoa(255, strtemp, 10) << endl;
+            output << 255 << endl;
+            output.write( (char *)fData, IHeight*IWidth*3);
+            output.close();
+
+        }//end of else
     }
 
 private:
@@ -322,6 +414,7 @@ int main () {
     cout << "maxOutputTime: " <<traceabilities.maxOutputTime() << endl;
     cout << endl;
 
+    /*
     cout << "-----------------------------" << endl;
     cout << traceabilities.graphvizWorkstationOriented();
     cout << "-----------------------------" << endl;
@@ -331,6 +424,9 @@ int main () {
     myfile << traceabilities.graphvizWorkstationOriented();
     myfile << endl;
     myfile.close();
+    */
+
+    traceabilities.image();
 
     return 0;
 }
