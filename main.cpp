@@ -259,7 +259,6 @@ public:
                 fData[i][j]= new char[3];
             }
         }
-
         // Init ALL Matrix
         for (long i=0; i<IHeight; i++) {
             for(long j=0; j<IWidth; j++) {
@@ -268,7 +267,6 @@ public:
                 fData[i][j][2]=255;
             }
         }
-
         // Time Line -- TOP
         for (long i=0; i<TIME_LINE_HEIGHT; i++) {
             for(long j=0; j<IWidth; j++) {
@@ -334,9 +332,7 @@ public:
                 }
                 previousTraceability=&(*it);
             }
-
             position+=V_RATIO;
-
         }
 
         ofstream output("/home/jpierre03/nonRSync/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/traceabilities.ppm", ios::binary|ios::out);
@@ -361,8 +357,7 @@ public:
                 }
             }
             output.close();
-
-        }//end of else
+        }
 
 
         for(long i=0; i<IHeight; i++) {
