@@ -221,7 +221,7 @@ public:
     }
 
     void image(void) {
-        const long V_RATIO=20;
+        const long V_RATIO=10;
         const long TIME_LINE_HEIGHT=2*V_RATIO;
         const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
         const long IWidth=(long)maxOutputTime();
@@ -230,10 +230,10 @@ public:
         char ***fData;
 
         fData= new char** [IHeight];
-        for(long i=0;i<IHeight;i++){
+        for(long i=0; i<IHeight; i++) {
             fData[i]= new char* [IWidth];
 
-            for(long j=0;j<IWidth;j++){
+            for(long j=0; j<IWidth; j++) {
                 fData[i][j]= new char[3];
             }
         }
@@ -284,23 +284,23 @@ public:
             //(*it).show();
             // input
             for (long i=cursor; i<cursor+V_RATIO; i++) {
-            for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
-                fData[i][j][0]=255; // rouge
-                fData[i][j][1]=0;
-                fData[i][j][2]=0;
-            }
-            // working
-            for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
-                fData[i][j][0]=0;
-                fData[i][j][1]=255; // vert
-                fData[i][j][2]=0;
-            }
-            // output
-            for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
-                fData[i][j][0]=0;
-                fData[i][j][1]=0;
-                fData[i][j][2]=0;
-            }
+                for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
+                    fData[i][j][0]=255; // rouge
+                    fData[i][j][1]=0;
+                    fData[i][j][2]=0;
+                }
+                // working
+                for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
+                    fData[i][j][0]=0;
+                    fData[i][j][1]=255; // vert
+                    fData[i][j][2]=0;
+                }
+                // output
+                for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
+                    fData[i][j][0]=0;
+                    fData[i][j][1]=0;
+                    fData[i][j][2]=0;
+                }
             }
             cursor+=V_RATIO;
 
@@ -332,13 +332,142 @@ public:
         }//end of else
 
 
-        /*for(long i=0;i<IHeight;i++){
-            for(long j=0;j<IWidth;j++){
-               delete[] fData[i][j];
+        for(long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                delete[] fData[i][j];
             }
             delete[] fData[i];
         }
-        delete[] fData;*/
+        delete[] fData;
+    }
+
+    void image_V2(void) {
+        const long V_RATIO=10;
+        const long TIME_LINE_HEIGHT=2*V_RATIO;
+        const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
+        const long IWidth=(long)maxOutputTime();
+
+        //char fData[IHeight][IWidth][3];
+        char ***fData;
+
+        fData= new char** [IHeight];
+        for(long i=0; i<IHeight; i++) {
+            fData[i]= new char* [IWidth];
+
+            for(long j=0; j<IWidth; j++) {
+                fData[i][j]= new char[3];
+            }
+        }
+
+        // Init ALL Matrix
+        for (long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                fData[i][j][0]=255;
+                fData[i][j][1]=255;
+                fData[i][j][2]=255;
+            }
+        }
+
+        // Time Line -- TOP
+        for (long i=0; i<TIME_LINE_HEIGHT; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*255;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+        // Time Line -- Botom
+        for (long i=IHeight-TIME_LINE_HEIGHT; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*255;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+        // Time Line --CROSS
+        for (long i=TIME_LINE_HEIGHT; i<IHeight-TIME_LINE_HEIGHT; i++) {
+            for(long j=0; j<IWidth; j++) {
+                int color=0;
+                long position=j;
+                position=(int)(j/V_RATIO)%2;
+                color=position*(255-240)+240;
+                fData[i][j][0]=fData[i][j][1]=fData[i][j][2]=color;
+            }
+        }
+
+        long position=TIME_LINE_HEIGHT; // on continue juste après la time line
+        long cursor=position;
+        // Add traceability informations
+        Traceability *previousTraceability=NULL;
+        for (TraceabilityVector::iterator it = begin(); it!=end(); ++it) {
+            //(*it).show();
+
+            if(previousTraceability!=NULL && (*previousTraceability).getOrderName()!=(*it).getOrderName() ){
+                cursor=position;
+            }
+            // input
+            for (long i=cursor; i<position+V_RATIO; i++) {
+                for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
+                    fData[i][j][0]=255; // rouge
+                    fData[i][j][1]=0;
+                    fData[i][j][2]=0;
+                }
+                // working
+                for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
+                    fData[i][j][0]=0;
+                    fData[i][j][1]=255; // vert
+                    fData[i][j][2]=0;
+                }
+                // output
+                for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
+                    fData[i][j][0]=0;
+                    fData[i][j][1]=0;
+                    fData[i][j][2]=0;
+                }
+                previousTraceability=&(*it);
+            }
+
+            position+=V_RATIO;
+
+        }
+
+        ofstream output("/home/jpierre03/nonRSync/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/traceabilities.ppm", ios::binary|ios::out);
+        if(!output) {
+            cout << "unable to open the output file "<< "d.ppm" << endl;
+        } else {
+            output << "P6"<< endl <<"# foreground "<<endl;
+            //output << itoa(IWidth, strtemp, 10);
+            output << IWidth;
+            output << " ";
+            //output << itoa(IHeight, strtemp, 10);
+            output << IHeight;
+            output << endl;
+            //output << itoa(255, strtemp, 10) << endl;
+            output << 255 << endl;
+            //output.write( (char *)fData, IHeight*IWidth*3);
+            for (long i=0; i<IHeight; i++) {
+                for(long j=0; j<IWidth; j++) {
+                    output.write( &fData[i][j][0], sizeof(fData[i][j][0]));
+                    output.write( &fData[i][j][1], sizeof(fData[i][j][1]));
+                    output.write( &fData[i][j][2], sizeof(fData[i][j][2]));
+                }
+            }
+            output.close();
+
+        }//end of else
+
+
+        for(long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                delete[] fData[i][j];
+            }
+            delete[] fData[i];
+        }
+        delete[] fData;
     }
 
 private:
@@ -395,8 +524,8 @@ private:
 
 int main () {
     const int MAX_ITEMS=7+1;
-
-    ifstream inFile ("/home/jpierre03/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/resultsSimulationTraceability.csv");
+    //ifstream inFile ("/home/jpierre03/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/resultsSimulationTraceability.csv");
+    ifstream inFile ("/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv");
     string line;
     int linenum = 0;
     TraceabilityVector traceabilities;
@@ -454,7 +583,8 @@ int main () {
     myfile.close();
     */
 
-    traceabilities.image();
+    //traceabilities.image();
+    traceabilities.image_V2();
 
     return 0;
 }
