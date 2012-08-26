@@ -214,8 +214,6 @@ public:
 			//M2_input -> M2_StartWorking -> M2_EndWorking -> M2_output;
             s+="	}\n";
         }
-
-
         // end of digraph
         s+="\n";
         s+="}";
@@ -331,6 +329,7 @@ int main () {
     ofstream myfile;
     myfile.open ("/home/jpierre03/test.gv");
     myfile << traceabilities.graphvizWorkstationOriented();
+    myfile << endl;
     myfile.close();
 
     return 0;
