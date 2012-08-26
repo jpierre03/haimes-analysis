@@ -7,8 +7,8 @@ using namespace std;
 
 int main()
 {
-	const int IHeight=255;
-	const int IWidth=255;
+	const int IHeight=(255);
+	const int IWidth=IHeight;
 
 	char fData[IHeight][IWidth][3];
 
@@ -16,9 +16,9 @@ int main()
 	for (int i=0;i<IWidth;i++){
 		for(int j=0;j<IHeight;j++){
 			tmp++;
-			fData[i][j][0]=(i)%255;
-			fData[i][j][1]=(j)%255;
-			fData[i][j][2]=(tmp)%(255/2);
+			fData[i][j][0]=(i)%(255/1);
+			fData[i][j][1]=(j)%(255/1);
+			fData[i][j][2]=(tmp)%(254/1);
 		}
 	}
 
