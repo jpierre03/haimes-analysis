@@ -278,7 +278,7 @@ private:
 int main () {
     const int MAX_ITEMS=7+1;
 
-    ifstream inFile ("/home/jpierre03/resultsSimulationTraceability.csv");
+    ifstream inFile ("/home/jpierre03/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/resultsSimulationTraceability.csv");
     string line;
     int linenum = 0;
     TraceabilityVector traceabilities;
