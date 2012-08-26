@@ -511,32 +511,32 @@ private:
         setMinWorkingTime(t.getEndWorkingTime()-t.getStartWorkingTime());
         setMaxWorkingTime(t.getEndWorkingTime()-t.getStartWorkingTime());
     }
-    void setMinInputTime(double value) {
+    void setMinInputTime(const double value) {
         if(_minInputTime > value) {
             _minInputTime=value;
         }
     }
-    void setMaxInputTime(double value) {
+    void setMaxInputTime(const double value) {
         if(_maxInputTime < value) {
             _maxInputTime=value;
         }
     }
-    void setMinOutputTime(double value) {
+    void setMinOutputTime(const double value) {
         if(_minOutputTime > value) {
             _minOutputTime=value;
         }
     }
-    void setMaxOutputTime(double value) {
+    void setMaxOutputTime(const double value) {
         if(_maxOutputTime < value) {
             _maxOutputTime=value;
         }
     }
-    void setMinWorkingTime(double value) {
+    void setMinWorkingTime(const double value) {
         if(_minWorkingTime > value) {
             _minWorkingTime=value;
         }
     }
-    void setMaxWorkingTime(double value) {
+    void setMaxWorkingTime(const double value) {
         if(_maxWorkingTime < value) {
             _maxWorkingTime=value;
         }
