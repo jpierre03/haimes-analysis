@@ -446,6 +446,8 @@ int main () {
             //cout << "Item #" << itemnum << ": " << item << endl;
             if(itemnum<MAX_ITEMS) { // pour éviter les segfault
                 items[itemnum]=item;
+            }else{
+                cerr<< "il y a trops d'éléments sur la ligne" << endl;
             }
         }
         if(itemnum==MAX_ITEMS-1) {
