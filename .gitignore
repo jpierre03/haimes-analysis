@@ -4,3 +4,11 @@
 
 # KDE
 .directory
+
+# images
+*.ppm
+
+# compilation
+*.out
+bin/
+obj/
