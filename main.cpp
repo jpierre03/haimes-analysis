@@ -307,9 +307,9 @@ public:
             // input
             for (long i=cursor; i<cursor+V_RATIO; i++) {
                 for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
-                    fData[i][j][0]=255; // rouge
-                    fData[i][j][1]=0;
-                    fData[i][j][2]=0;
+                    fData[i][j][0]=250;  // rouge
+                    fData[i][j][1]=155;  // vert
+                    fData[i][j][2]=20;   // bleu
                 }
                 // working
                 for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
@@ -319,7 +319,7 @@ public:
                 }
                 // output
                 for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
-                    fData[i][j][0]=0;
+                    fData[i][j][0]=255;
                     fData[i][j][1]=0;
                     fData[i][j][2]=0;
                 }
@@ -434,9 +434,9 @@ public:
             // input
             for (long i=cursor; i<position+V_RATIO; i++) {
                 for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
-                    fData[i][j][0]=255; // rouge
-                    fData[i][j][1]=0;
-                    fData[i][j][2]=0;
+                    fData[i][j][0]=250;  // rouge
+                    fData[i][j][1]=155;  // vert
+                    fData[i][j][2]=20;   // bleu
                 }
                 // working
                 for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
@@ -446,7 +446,7 @@ public:
                 }
                 // output
                 for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
-                    fData[i][j][0]=0;
+                    fData[i][j][0]=255;
                     fData[i][j][1]=0;
                     fData[i][j][2]=0;
                 }
