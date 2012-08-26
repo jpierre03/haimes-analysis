@@ -363,7 +363,7 @@ public:
         delete[] fData;
     }
 
-    void image_V2(void) {
+    void image_V2(bool cumulate=false) {
         const long V_RATIO=10;
         const long TIME_LINE_HEIGHT=2*V_RATIO;
         const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
@@ -429,6 +429,9 @@ public:
             //(*it).show();
 
             if(previousTraceability!=NULL && (*previousTraceability).getOrderName()!=(*it).getOrderName() ){
+                cursor=position;
+            }
+            if(!cumulate){
                 cursor=position;
             }
             // input
@@ -610,7 +613,7 @@ int main () {
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image_V2();
-    traceabilities.image_V2();
+    traceabilities.image_V2(true);
 
     return 0;
 }
