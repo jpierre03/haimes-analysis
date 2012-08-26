@@ -242,7 +242,7 @@ public:
         return s;
     }
 
-    void image_V2(bool cumulate=false) {
+    void image(bool cumulate=false) {
         const long V_RATIO=10;
         const long TIME_LINE_HEIGHT=2*V_RATIO;
         const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
@@ -490,8 +490,8 @@ int main () {
     //traceabilities.sortByOrderName();
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
-    //traceabilities.image_V2();
-    traceabilities.image_V2(true);
+    //traceabilities.image();
+    traceabilities.image(true);
 
     return 0;
 }
