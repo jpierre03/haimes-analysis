@@ -196,7 +196,7 @@ public:
             replaceAll(order, "-", "_");
             string id=ws+"_"+order;
 
-            cout <<  ws << endl;
+            //cout <<  ws << endl;
 
             // traceability (*it)
             s+="	subgraph cluster_"+id+" {\n";
