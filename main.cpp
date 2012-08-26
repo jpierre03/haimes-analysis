@@ -428,7 +428,7 @@ private:
 
 int main () {
     const int MAX_ITEMS=7+1;
-    //ifstream inFile ("/home/jpierre03/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/resultsSimulationTraceability.csv");
+    //ifstream inFile ("resultsSimulationTraceability.csv");
     ifstream inFile ("/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv");
     string line;
     int linenum = 0;
@@ -481,7 +481,7 @@ int main () {
     cout << "-----------------------------" << endl;
 
     ofstream myfile;
-    myfile.open ("/home/jpierre03/test.gv");
+    myfile.open ("test.gv");
     myfile << traceabilities.graphvizWorkstationOriented();
     myfile << endl;
     myfile.close();
