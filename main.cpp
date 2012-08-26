@@ -166,21 +166,21 @@ public:
         return _maxWorkingTime;
     }
 
-    void sortByOrderName(){
-        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+    void sortByOrderName() {
+        stable_sort(begin(), end(), [](Traceability a, Traceability b) {
             return a.getOrderName() > b.getOrderName();
         });
 
     }
 
-    void sortByWorkstationName(){
-        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+    void sortByWorkstationName() {
+        stable_sort(begin(), end(), [](Traceability a, Traceability b) {
             return a.getWorkstationName() > b.getWorkstationName();
         });
     }
 
-    void sortByWorkstationName_AND_OrderName(){
-        stable_sort(begin(), end(), [](Traceability a, Traceability b){
+    void sortByWorkstationName_AND_OrderName() {
+        stable_sort(begin(), end(), [](Traceability a, Traceability b) {
             return !(a.getOrderName() <= b.getOrderName()) && (a.getStartWorkingTime() >= b.getEndWorkingTime());
         });
     }
@@ -248,24 +248,10 @@ public:
         const long IWidth=(long)maxOutputTime();
 
         //char fData[IHeight][IWidth][3];
-        char ***fData;
 
-        fData= new char** [IHeight];
-        for(long i=0; i<IHeight; i++) {
-            fData[i]= new char* [IWidth];
+        allocate_fData(IHeight, IWidth);
+        initialize_fData(IHeight, IWidth);
 
-            for(long j=0; j<IWidth; j++) {
-                fData[i][j]= new char[3];
-            }
-        }
-        // Init ALL Matrix
-        for (long i=0; i<IHeight; i++) {
-            for(long j=0; j<IWidth; j++) {
-                fData[i][j][0]=255;
-                fData[i][j][1]=255;
-                fData[i][j][2]=255;
-            }
-        }
         // Time Line -- TOP
         for (long i=0; i<TIME_LINE_HEIGHT; i++) {
             for(long j=0; j<IWidth; j++) {
@@ -304,10 +290,10 @@ public:
         for (TraceabilityVector::iterator it = begin(); it!=end(); ++it) {
             //(*it).show();
 
-            if(previousTraceability!=NULL && (*previousTraceability).getOrderName()!=(*it).getOrderName() ){
+            if(previousTraceability!=NULL && (*previousTraceability).getOrderName()!=(*it).getOrderName() ) {
                 cursor=position;
             }
-            if(!cumulate){
+            if(!cumulate) {
                 cursor=position;
             }
             // input
@@ -357,15 +343,9 @@ public:
             }
             output.close();
         }
-
-        for(long i=0; i<IHeight; i++) {
-            for(long j=0; j<IWidth; j++) {
-                delete[] fData[i][j];
-            }
-            delete[] fData[i];
-        }
-        delete[] fData;
+        delete_fData(IHeight, IWidth);
     }
+
 
 private:
     double _minInputTime;
@@ -416,13 +396,45 @@ private:
             _maxWorkingTime=value;
         }
     }
+
+    char ***fData; // used in image
+    void allocate_fData(long IHeight, long IWidth) {
+        fData= new char** [IHeight];
+        for(long i=0; i<IHeight; i++) {
+            fData[i]= new char* [IWidth];
+
+            for(long j=0; j<IWidth; j++) {
+                fData[i][j]= new char[3];
+            }
+        }
+    }
+    void initialize_fData(long IHeight, long IWidth) {
+        // Init ALL Matrix
+        for (long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                fData[i][j][0]=255;
+                fData[i][j][1]=255;
+                fData[i][j][2]=255;
+            }
+        }
+    }
+    void delete_fData(long IHeight, long IWidth) {
+        for(long i=0; i<IHeight; i++) {
+            for(long j=0; j<IWidth; j++) {
+                delete[] fData[i][j];
+            }
+            delete[] fData[i];
+        }
+        delete[] fData;
+    }
+
 };
 
 
 int main () {
     const int MAX_ITEMS=7+1;
-    //ifstream inFile ("resultsSimulationTraceability.csv");
-    ifstream inFile ("/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv");
+    ifstream inFile ("resultsSimulationTraceability.csv");
+    //ifstream inFile ("/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv");
     string line;
     int linenum = 0;
     TraceabilityVector traceabilities;
@@ -439,7 +451,7 @@ int main () {
             //cout << "Item #" << itemnum << ": " << item << endl;
             if(itemnum<MAX_ITEMS) { // pour éviter les segfault
                 items[itemnum]=item;
-            }else{
+            } else {
                 cerr<< "il y a trops d'éléments sur la ligne" << endl;
             }
         }
