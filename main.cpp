@@ -166,7 +166,6 @@ public:
         return _maxWorkingTime;
     }
 
-
     void sortByOrderName(){
         stable_sort(begin(), end(), [](Traceability a, Traceability b){
             return a.getOrderName() > b.getOrderName();
@@ -358,7 +357,6 @@ public:
             }
             output.close();
         }
-
 
         for(long i=0; i<IHeight; i++) {
             for(long j=0; j<IWidth; j++) {
