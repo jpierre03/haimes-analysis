@@ -487,7 +487,6 @@ int main () {
     myfile.close();
     */
 
-    //traceabilities.image();
     //traceabilities.sortByOrderName();
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
