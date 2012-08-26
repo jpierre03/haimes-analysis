@@ -436,15 +436,15 @@ int main () {
 
     while (getline (inFile, line)) {
         linenum++;
-        //cout << "\nLine #" << linenum << ":" << endl;
         istringstream linestream(line);
         string item;
         int itemnum = 0;
         string items[MAX_ITEMS];
+        //cout << "\nLine #" << linenum << ":" << endl;
         while (getline (linestream, item, ',')) {
             itemnum++;
             //cout << "Item #" << itemnum << ": " << item << endl;
-            if(itemnum<MAX_ITEMS) {
+            if(itemnum<MAX_ITEMS) { // pour éviter les segfault
                 items[itemnum]=item;
             }
         }
