@@ -459,10 +459,8 @@ int main () {
                 items[5],
                 items[6],
                 items[7]);
-            //t.show();
             traceabilities.push_back(t);
         }
-
     }
 
     //traceabilities.show();
