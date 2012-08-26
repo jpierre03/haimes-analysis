@@ -221,12 +221,22 @@ public:
     }
 
     void image(void) {
-        const long TIME_LINE_HEIGHT=10;
-        const long V_RATIO=10;
+        const long V_RATIO=20;
+        const long TIME_LINE_HEIGHT=2*V_RATIO;
         const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
         const long IWidth=(long)maxOutputTime();
 
-        char fData[IHeight][IWidth][3];
+        //char fData[IHeight][IWidth][3];
+        char ***fData;
+
+        fData= new char** [IHeight];
+        for(long i=0;i<IHeight;i++){
+            fData[i]= new char* [IWidth];
+
+            for(long j=0;j<IWidth;j++){
+                fData[i][j]= new char[3];
+            }
+        }
 
         // Init ALL Matrix
         for (long i=0; i<IHeight; i++) {
@@ -236,6 +246,7 @@ public:
                 fData[i][j][2]=255;
             }
         }
+
         // Time Line -- TOP
         for (long i=0; i<TIME_LINE_HEIGHT; i++) {
             for(long j=0; j<IWidth; j++) {
@@ -292,6 +303,7 @@ public:
             }
             }
             cursor+=V_RATIO;
+
         }
 
         ofstream output("/home/jpierre03/nonRSync/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/traceabilities.ppm", ios::binary|ios::out);
@@ -307,10 +319,26 @@ public:
             output << endl;
             //output << itoa(255, strtemp, 10) << endl;
             output << 255 << endl;
-            output.write( (char *)fData, IHeight*IWidth*3);
+            //output.write( (char *)fData, IHeight*IWidth*3);
+            for (long i=0; i<IHeight; i++) {
+                for(long j=0; j<IWidth; j++) {
+                    output.write( &fData[i][j][0], sizeof(fData[i][j][0]));
+                    output.write( &fData[i][j][1], sizeof(fData[i][j][1]));
+                    output.write( &fData[i][j][2], sizeof(fData[i][j][2]));
+                }
+            }
             output.close();
 
         }//end of else
+
+
+        /*for(long i=0;i<IHeight;i++){
+            for(long j=0;j<IWidth;j++){
+               delete[] fData[i][j];
+            }
+            delete[] fData[i];
+        }
+        delete[] fData;*/
     }
 
 private:
