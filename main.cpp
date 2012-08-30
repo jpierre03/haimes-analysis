@@ -430,8 +430,9 @@ private:
 
 };
 
-TraceabilityVector import_from_CSV_file(string fileName) {
+TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
     const int MAX_ITEMS=7+1;
+
     ifstream inFile (fileName);
     string line;
     int linenum = 0;
@@ -473,7 +474,7 @@ int main () {
     //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
     const string OUTPUT_PPM_FILE="traceabilities.ppm";
 
-    TraceabilityVector traceabilities=import_from_CSV_file(INPUT_CSV_FILE);
+    TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
 
 
     //traceabilities.show();
