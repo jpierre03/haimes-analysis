@@ -430,15 +430,9 @@ private:
 
 };
 
-
-int main () {
+TraceabilityVector import_from_CSV_file(string fileName) {
     const int MAX_ITEMS=7+1;
-
-    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
-    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
-    const string OUTPUT_PPM_FILE="traceabilities.ppm";
-
-    ifstream inFile (INPUT_CSV_FILE);
+    ifstream inFile (fileName);
     string line;
     int linenum = 0;
     TraceabilityVector traceabilities;
@@ -471,6 +465,16 @@ int main () {
             traceabilities.push_back(t);
         }
     }
+    return traceabilities;
+}
+
+int main () {
+    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
+    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
+    const string OUTPUT_PPM_FILE="traceabilities.ppm";
+
+    TraceabilityVector traceabilities=import_from_CSV_file(INPUT_CSV_FILE);
+
 
     //traceabilities.show();
     //traceabilities.showWorkstationName();
