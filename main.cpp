@@ -59,17 +59,7 @@ TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
     return traceabilities;
 }
 
-int main () {
-    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
-    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
-    const string OUTPUT_PPM_FILE="traceabilities.ppm";
-
-    TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
-
-    assert(traceabilities.size()>0);
-
-    //traceabilities.show();
-    //traceabilities.showWorkstationName();
+void showStatistics(TraceabilityVector & traceabilities){
     cout << "minInputTime: " <<traceabilities.minInputTime() << endl;
     cout << "maxInputTime: " <<traceabilities.maxInputTime() << endl;
     cout << endl;
@@ -86,18 +76,36 @@ int main () {
     assert(traceabilities.maxWorkingTime()>0);
     assert(traceabilities.minOutputTime()>=0);
     assert(traceabilities.maxOutputTime()>0);
+}
 
-    /*
+void showGraphviz(TraceabilityVector & traceabilities){
     cout << "-----------------------------" << endl;
     cout << traceabilities.graphvizWorkstationOriented();
     cout << "-----------------------------" << endl;
+}
 
+void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities){
     ofstream myfile;
     myfile.open ("test.gv");
     myfile << traceabilities.graphvizWorkstationOriented();
     myfile << endl;
     myfile.close();
-    */
+}
+
+int main () {
+    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
+    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
+    const string OUTPUT_PPM_FILE="traceabilities.ppm";
+
+    TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
+
+    assert(traceabilities.size()>0);
+
+    //traceabilities.show();
+    //traceabilities.showWorkstationName();
+    showStatistics(traceabilities);
+    showGraphviz(traceabilities);
+    make_graphvizWorkstationOriented(traceabilities);
 
     //traceabilities.sortByOrderName();
     //traceabilities.sortByWorkstationName();
