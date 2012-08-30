@@ -27,6 +27,11 @@ TraceabilityVector::TraceabilityVector() {
     _maxWorkingTime=numeric_limits<double>::min( );
 }
 
+TraceabilityVector::~TraceabilityVector() {
+    cout << "TraceabilityVector::~TraceabilityVector destructor" << endl;
+}
+
+
 void TraceabilityVector::show(void) {
     for (TraceabilityVector::iterator it = begin(); it!=end(); ++it) {
         (*it).show();

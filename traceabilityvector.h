@@ -16,11 +16,10 @@
 
 using namespace std;
 
-
-
 class TraceabilityVector  : public vector<Traceability> {
 public:
     TraceabilityVector();
+    virtual ~TraceabilityVector();
     void show(void);
     void showWorkstationName(void);
     virtual void push_back (Traceability & traceability);
