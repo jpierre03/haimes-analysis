@@ -498,5 +498,7 @@ int main () {
     //traceabilities.image();
     traceabilities.image(true);
 
+    system("eog traceabilities.ppm");
+
     return 0;
 }
