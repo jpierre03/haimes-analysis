@@ -105,6 +105,86 @@ void make_image(TraceabilityVector & traceabilities) {
     system("eog traceabilities.ppm");
 }
 
+/*****************************************/
+/*** Test FSM */
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class State {
+public:
+    const string Action( int i ) {
+        return DoSomething(i);
+    }
+private:
+    virtual const string DoSomething( int i ) = 0;
+};
+
+class StateA: public State {
+private:
+    const string DoSomething( int i ) {
+        cout << "A -> ";
+        return (i%2==0) ? "B" : "C";
+    }
+};
+
+class StateB: public State {
+private:
+    const string DoSomething( int i ) {
+        cout << "B -> ";
+        return (i%3==0) ? "C" : "A";
+    }
+};
+
+class StateC: public State {
+private:
+    const string DoSomething( int i ) {
+        cout << "C -> ";
+        return (i%4==0) ? "B" : "D";
+    }
+};
+class StateD: public State {
+private:
+    const string DoSomething( int i ) {
+        cout << "D -> ";
+        return (i%4==0) ? "B" : "A";
+    }
+};
+
+class Graph {
+public:
+    Graph() {
+        states_["A"] = new StateA;
+        states_["B"] = new StateB;
+        states_["C"] = new StateC;
+        states_["D"] = new StateD;
+        currentState_ = states_["A"];
+    }
+
+    void DoSomething( int i ) {
+        string nextState = currentState_->Action(i);
+        currentState_ = states_[nextState];
+    }
+
+private:
+    map<string, State*> states_;
+    State * currentState_;
+};
+
+int testFSM() {
+    Graph graph;
+    for (int i=0; i<20000 ; i++)
+        graph.DoSomething(i);
+
+    cout << "end" << endl;
+    cin.get();
+    return 0;
+}
+/*** END Test FSM */
+/*****************************************/
+
 int main () {
     const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
     //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
@@ -119,6 +199,8 @@ int main () {
     showGraphviz(traceabilities);
     make_graphvizWorkstationOriented(traceabilities);
     make_image(traceabilities);
+
+    testFSM();
 
     return 0;
 }
