@@ -241,7 +241,7 @@ public:
         return s;
     }
 
-    void image(bool cumulate=false) {
+    void image(bool cumulate=false, string ppmOutputFileName="traceabilities.ppm") {
         const long V_RATIO=10;
         const long TIME_LINE_HEIGHT=2*V_RATIO;
         const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
@@ -320,7 +320,7 @@ public:
             position+=V_RATIO;
         }
 
-        ofstream output("/home/jpierre03/nonRSync/GIT-depot/sandbox-cb/ReadHAIMES_CSV_Results/traceabilities.ppm", ios::binary|ios::out);
+        ofstream output(ppmOutputFileName, ios::binary|ios::out);
         if(!output) {
             cout << "unable to open the output file "<< "d.ppm" << endl;
         } else {
