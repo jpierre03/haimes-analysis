@@ -500,7 +500,7 @@ int main () {
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image();
-    traceabilities.image(true);
+    traceabilities.image(true, OUTPUT_PPM_FILE);
 
     system("eog traceabilities.ppm");
 
