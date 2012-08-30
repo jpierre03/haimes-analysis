@@ -59,7 +59,7 @@ TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
     return traceabilities;
 }
 
-void showStatistics(TraceabilityVector & traceabilities){
+void showStatistics(TraceabilityVector & traceabilities) {
     cout << "minInputTime: " <<traceabilities.minInputTime() << endl;
     cout << "maxInputTime: " <<traceabilities.maxInputTime() << endl;
     cout << endl;
@@ -78,13 +78,13 @@ void showStatistics(TraceabilityVector & traceabilities){
     assert(traceabilities.maxOutputTime()>0);
 }
 
-void showGraphviz(TraceabilityVector & traceabilities){
+void showGraphviz(TraceabilityVector & traceabilities) {
     cout << "-----------------------------" << endl;
     cout << traceabilities.graphvizWorkstationOriented();
     cout << "-----------------------------" << endl;
 }
 
-void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities){
+void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities) {
     ofstream myfile;
     myfile.open ("test.gv");
     myfile << traceabilities.graphvizWorkstationOriented();
@@ -92,10 +92,22 @@ void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities){
     myfile.close();
 }
 
+
+void make_image(TraceabilityVector & traceabilities) {
+    const string OUTPUT_PPM_FILE="traceabilities.ppm";
+
+    //traceabilities.sortByOrderName();
+    //traceabilities.sortByWorkstationName();
+    traceabilities.sortByWorkstationName_AND_OrderName();
+    //traceabilities.image();
+    traceabilities.image(true, OUTPUT_PPM_FILE);
+
+    system("eog traceabilities.ppm");
+}
+
 int main () {
     const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
     //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
-    const string OUTPUT_PPM_FILE="traceabilities.ppm";
 
     TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
 
@@ -106,14 +118,7 @@ int main () {
     showStatistics(traceabilities);
     showGraphviz(traceabilities);
     make_graphvizWorkstationOriented(traceabilities);
-
-    //traceabilities.sortByOrderName();
-    //traceabilities.sortByWorkstationName();
-    traceabilities.sortByWorkstationName_AND_OrderName();
-    //traceabilities.image();
-    traceabilities.image(true, OUTPUT_PPM_FILE);
-
-    system("eog traceabilities.ppm");
+    make_image(traceabilities);
 
     return 0;
 }
