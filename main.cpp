@@ -433,8 +433,12 @@ private:
 
 int main () {
     const int MAX_ITEMS=7+1;
-    ifstream inFile ("resultsSimulationTraceability.csv");
-    //ifstream inFile ("/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv");
+
+    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
+    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
+    const string OUTPUT_PPM_FILE="traceabilities.ppm";
+
+    ifstream inFile (INPUT_CSV_FILE);
     string line;
     int linenum = 0;
     TraceabilityVector traceabilities;
