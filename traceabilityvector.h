@@ -32,7 +32,7 @@ public:
     void sortByWorkstationName();
     void sortByWorkstationName_AND_OrderName() ;
     string graphvizWorkstationOriented(void);
-    void image(bool cumulate, string ppmOutputFileName);
+    void image(const bool cumulate, const string ppmOutputFileName);
 private:
     double _minInputTime;
     double _maxInputTime;
@@ -49,9 +49,9 @@ private:
     void setMinWorkingTime(const double value);
     void setMaxWorkingTime(const double value);
     char ***fData; // used in image
-    void allocate_fData(long IHeight, long IWidth);
-    void initialize_fData(long IHeight, long IWidth);
-    void delete_fData(long IHeight, long IWidth);
+    void allocate_fData(const long IHeight, const long IWidth);
+    void initialize_fData(const long IHeight, const long IWidth);
+    void delete_fData(const long IHeight, const long IWidth);
 };
 
 #endif // TRACEABILITYVECTOR_H

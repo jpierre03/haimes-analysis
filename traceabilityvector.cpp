@@ -143,7 +143,7 @@ string TraceabilityVector::graphvizWorkstationOriented(void) {
     return s;
 }
 
-void TraceabilityVector::image(bool cumulate=false, string ppmOutputFileName="traceabilities.ppm") {
+void TraceabilityVector::image(const bool cumulate=false, const string ppmOutputFileName="traceabilities.ppm") {
     const long V_RATIO=10;
     const long TIME_LINE_HEIGHT=2*V_RATIO;
     const long IHeight=(long)vector<Traceability>::size()*V_RATIO+TIME_LINE_HEIGHT+TIME_LINE_HEIGHT;
@@ -292,7 +292,7 @@ void TraceabilityVector::setMaxWorkingTime(const double value) {
     }
 }
 
-void TraceabilityVector::allocate_fData(long IHeight, long IWidth) {
+void TraceabilityVector::allocate_fData(const long IHeight, const long IWidth) {
     fData= new char** [IHeight];
     for(long i=0; i<IHeight; i++) {
         fData[i]= new char* [IWidth];
@@ -302,7 +302,7 @@ void TraceabilityVector::allocate_fData(long IHeight, long IWidth) {
         }
     }
 }
-void TraceabilityVector::initialize_fData(long IHeight, long IWidth) {
+void TraceabilityVector::initialize_fData(const long IHeight, const long IWidth) {
     // Init ALL Matrix
     for (long i=0; i<IHeight; i++) {
         for(long j=0; j<IWidth; j++) {
@@ -312,7 +312,7 @@ void TraceabilityVector::initialize_fData(long IHeight, long IWidth) {
         }
     }
 }
-void TraceabilityVector::delete_fData(long IHeight, long IWidth) {
+void TraceabilityVector::delete_fData(const long IHeight, const long IWidth) {
     for(long i=0; i<IHeight; i++) {
         for(long j=0; j<IWidth; j++) {
             delete[] fData[i][j];
