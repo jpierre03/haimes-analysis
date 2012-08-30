@@ -173,14 +173,12 @@ private:
     State * currentState_;
 };
 
-int testFSM() {
+void testFSM(void) {
     Graph graph;
     for (int i=0; i<20000 ; i++)
         graph.DoSomething(i);
 
     cout << "end" << endl;
-    cin.get();
-    return 0;
 }
 /*** END Test FSM */
 /*****************************************/
@@ -193,13 +191,14 @@ int main () {
 
     assert(traceabilities.size()>0);
 
+    /*
     //traceabilities.show();
     //traceabilities.showWorkstationName();
     showStatistics(traceabilities);
     showGraphviz(traceabilities);
     make_graphvizWorkstationOriented(traceabilities);
     make_image(traceabilities);
-
+    */
     testFSM();
 
     return 0;
