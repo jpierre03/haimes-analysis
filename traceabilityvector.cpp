@@ -39,7 +39,9 @@ void TraceabilityVector::showWorkstationName(void) {
     }
 }
 
-void TraceabilityVector::push_back ( Traceability traceability ) {
+void TraceabilityVector::push_back (Traceability &traceability ) {
+    assert(traceability.getWorkstationName().size()>0);
+
     vector<Traceability>::push_back(traceability);
     makeStatistics(traceability);
 }

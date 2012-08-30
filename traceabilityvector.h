@@ -1,6 +1,8 @@
 #ifndef TRACEABILITYVECTOR_H
 #define TRACEABILITYVECTOR_H
 
+//#define NDEBUG
+#include <assert.h>
 #include <algorithm>
 #include <limits>
 #include <fstream>
@@ -21,7 +23,7 @@ public:
     TraceabilityVector();
     void show(void);
     void showWorkstationName(void);
-    virtual void push_back ( Traceability traceability ) ;
+    virtual void push_back (Traceability & traceability);
     double minInputTime();
     double maxInputTime() ;
     double minOutputTime();

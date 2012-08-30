@@ -1,6 +1,8 @@
 #ifndef TRACEABILITY_H
 #define TRACEABILITY_H
 
+//#define NDEBUG
+#include <assert.h>
 #include <algorithm>
 #include <limits>
 #include <fstream>

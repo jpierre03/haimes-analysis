@@ -1,3 +1,5 @@
+//#define NDEBUG
+#include <assert.h>
 #include <algorithm>
 #include <limits>
 #include <fstream>
@@ -10,8 +12,6 @@
 #include "traceabilityvector.h"
 
 using namespace std;
-
-
 
 template <class T>
 inline std::string to_string (const T& t) {
@@ -66,6 +66,7 @@ int main () {
 
     TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
 
+    assert(traceabilities.size()>0);
 
     //traceabilities.show();
     //traceabilities.showWorkstationName();
@@ -78,6 +79,13 @@ int main () {
     cout << "minOutputTime: " <<traceabilities.minOutputTime() << endl;
     cout << "maxOutputTime: " <<traceabilities.maxOutputTime() << endl;
     cout << endl;
+
+    assert(traceabilities.minInputTime()>=0);
+    assert(traceabilities.maxInputTime()>0);
+    assert(traceabilities.minWorkingTime()>=0);
+    assert(traceabilities.maxWorkingTime()>0);
+    assert(traceabilities.minOutputTime()>=0);
+    assert(traceabilities.maxOutputTime()>0);
 
     /*
     cout << "-----------------------------" << endl;
