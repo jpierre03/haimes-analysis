@@ -208,21 +208,21 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
         // input
         for (long i=cursor; i<position+V_RATIO; i++) {
             for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
-                fData[i][j][0]=250;  // rouge
-                fData[i][j][1]=155;  // vert
-                fData[i][j][2]=20;   // bleu
+                fData[i][j][0]=(char)250;  // rouge
+                fData[i][j][1]=(char)155;  // vert
+                fData[i][j][2]=(char)20;   // bleu
             }
             // working
             for(long j=(long)(*it).getStartWorkingTime(); j<(long)(*it).getEndWorkingTime(); j++) {
-                fData[i][j][0]=0;
-                fData[i][j][1]=255; // vert
-                fData[i][j][2]=0;
+                fData[i][j][0]=(char)0;
+                fData[i][j][1]=(char)255; // vert
+                fData[i][j][2]=(char)0;
             }
             // output
             for(long j=(long)(*it).getEndWorkingTime(); j<(long)(*it).getOutputTime(); j++) {
-                fData[i][j][0]=255;
-                fData[i][j][1]=0;
-                fData[i][j][2]=0;
+                fData[i][j][0]=(char)255;
+                fData[i][j][1]=(char)0;
+                fData[i][j][2]=(char)0;
             }
             previousTraceability=&(*it);
         }
@@ -313,9 +313,9 @@ void TraceabilityVector::initialize_fData(const long IHeight, const long IWidth)
     // Init ALL Matrix
     for (long i=0; i<IHeight; i++) {
         for(long j=0; j<IWidth; j++) {
-            fData[i][j][0]=255;
-            fData[i][j][1]=255;
-            fData[i][j][2]=255;
+            fData[i][j][0]=(char)255;
+            fData[i][j][1]=(char)255;
+            fData[i][j][2]=(char)255;
         }
     }
 }
