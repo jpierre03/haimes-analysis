@@ -1,4 +1,4 @@
-//#define NDEBUG
+//#define NDEBUG // enable this to disable assert() macro
 #include <assert.h>
 #include <algorithm>
 #include <limits>
@@ -175,7 +175,7 @@ private:
 
 void testFSM(void) {
     Graph graph;
-    for (int i=0; i<20000 ; i++)
+    for (int i=0; i<20*1000 ; i++)
         graph.DoSomething(i);
 
     cout << "end" << endl;
