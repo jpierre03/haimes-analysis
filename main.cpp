@@ -92,7 +92,6 @@ void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities) {
     myfile.close();
 }
 
-
 void make_image(TraceabilityVector & traceabilities) {
     const string OUTPUT_PPM_FILE="traceabilities.ppm";
 
@@ -191,15 +190,14 @@ int main () {
 
     assert(traceabilities.size()>0);
 
-    /*
+
     //traceabilities.show();
     //traceabilities.showWorkstationName();
     showStatistics(traceabilities);
-    showGraphviz(traceabilities);
-    make_graphvizWorkstationOriented(traceabilities);
+    //showGraphviz(traceabilities);
+    //make_graphvizWorkstationOriented(traceabilities);
     make_image(traceabilities);
-    */
-    testFSM();
+    //testFSM();
 
     return 0;
 }
