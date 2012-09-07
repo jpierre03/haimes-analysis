@@ -301,6 +301,7 @@ void TraceabilityVector::setMaxWorkingTime(const double value) {
 
 void TraceabilityVector::allocate_fData(const long IHeight, const long IWidth) {
     fData= new char** [IHeight];
+    cout<<"Allocation de mémoire pour stocker l'image"<<endl;
     for(long i=0; i<IHeight; i++) {
         fData[i]= new char* [IWidth];
 
@@ -308,6 +309,7 @@ void TraceabilityVector::allocate_fData(const long IHeight, const long IWidth) {
             fData[i][j]= new char[3];
         }
     }
+    cout<<"Fin--Allocation de mémoire pour stocker l'image"<<endl;
 }
 void TraceabilityVector::initialize_fData(const long IHeight, const long IWidth) {
     // Init ALL Matrix
