@@ -201,6 +201,14 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
 
         if(previousTraceability!=NULL && (*previousTraceability).getOrderName()!=(*it).getOrderName() ) {
             cursor=position;
+            //trace une ligne de couleur pour marquer la séparation des OF
+            /*for (long i=cursor; i<position+V_RATIO; i++) {
+                for(long j=0; j<IWidth; j++) {
+                    fData[i][j][0]=(char)220;  // rouge
+                    fData[i][j][1]=(char)220;  // vert
+                    fData[i][j][2]=(char)255;   // bleu
+                }
+            }*/
         }
         if(!cumulate) {
             cursor=position;
