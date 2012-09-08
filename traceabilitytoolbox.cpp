@@ -80,6 +80,8 @@ void make_image(TraceabilityVector & traceabilities, const bool isCumulate, cons
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image();
     traceabilities.image(isCumulate, output_ppm_file);
+}
 
+void show_image() {
     system("eog traceabilities.ppm");
 }

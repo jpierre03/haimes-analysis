@@ -113,6 +113,7 @@ int main (int argc, char *argv[]) {
     //showGraphviz(traceabilities);
     //make_graphvizWorkstationOriented(traceabilities);
     make_image(traceabilities);
+    show_image();
     //testFSM();
 
     return 0;
