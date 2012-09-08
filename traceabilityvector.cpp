@@ -213,8 +213,8 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
         if(!cumulate) {
             cursor=position;
         }
-        // input
         for (long i=cursor; i<position+V_RATIO; i++) {
+            // input
             for(long j=(long)(*it).getInputTime(); j<(long)(*it).getStartWorkingTime(); j++) {
                 fData[i][j][0]=(char)250;  // rouge
                 fData[i][j][1]=(char)155;  // vert
@@ -234,6 +234,15 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
             }
             previousTraceability=&(*it);
         }
+        /*if(cumulate) {
+            for (long i=cursor; i<position+V_RATIO; i++) {
+                for(long j=0; j<IWidth; j++) {
+                    fData[i][j][0]=fData[cursor][j][0];  // rouge
+                    fData[i][j][1]=fData[cursor][j][1];  // vert
+                    fData[i][j][2]=fData[cursor][j][2];   // bleu
+                }
+            }
+        }*/
         position+=V_RATIO;
     }
 
