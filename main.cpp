@@ -92,14 +92,12 @@ void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities) {
     myfile.close();
 }
 
-void make_image(TraceabilityVector & traceabilities, bool isCumulate=false) {
-    const string OUTPUT_PPM_FILE="traceabilities.ppm";
-
+void make_image(TraceabilityVector & traceabilities, bool isCumulate=false,const string output_ppm_file="traceabilities.ppm") {
     //traceabilities.sortByOrderName();
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image();
-    traceabilities.image(isCumulate, OUTPUT_PPM_FILE);
+    traceabilities.image(isCumulate, output_ppm_file);
 
     system("eog traceabilities.ppm");
 }
