@@ -180,8 +180,10 @@ void testFSM(void) {
 /*** END Test FSM */
 /*****************************************/
 
-int main () {
-    const string INPUT_CSV_FILE="resultsSimulationTraceability2.csv";
+int main (int argc, char *argv[]) {
+    //const string INPUT_CSV_FILE="resultsSimulationTraceability2.csv";
+    const string INPUT_CSV_FILE="resultsSimulationTraceability.csv";
+    //const string INPUT_CSV_FILE="/home/jpierre03/GIT-depot/dev-haimes/resultsSimulationTraceability.csv";
     TraceabilityVector traceabilities=import_traceabilities_from_CSV_file(INPUT_CSV_FILE);
 
     assert(traceabilities.size()>0);
