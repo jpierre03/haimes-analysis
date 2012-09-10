@@ -75,13 +75,16 @@ void make_graphvizWorkstationOriented(TraceabilityVector & traceabilities) {
 }
 
 //void make_image(TraceabilityVector & traceabilities, bool isCumulate=false, const string output_ppm_file="traceabilities.ppm") {
-void make_image(TraceabilityVector & traceabilities, const bool isCumulate, const string output_ppm_file) {
+TraceabilityImage* make_image(TraceabilityVector & traceabilities, const bool isCumulate, const string output_ppm_file) {
     //traceabilities.sortByOrderName();
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image();
-    TraceabilityImage image(traceabilities);
-    image.image(isCumulate, output_ppm_file);
+    TraceabilityImage* image;
+    image= new TraceabilityImage(traceabilities);
+    image->image(isCumulate, output_ppm_file);
+
+    return image;
 }
 
 void show_image() {

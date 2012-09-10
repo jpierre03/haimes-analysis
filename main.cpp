@@ -179,7 +179,8 @@ int main (int argc, char *argv[]) {
     showStatistics(traceabilities);
     //showGraphviz(traceabilities);
     //make_graphvizWorkstationOriented(traceabilities);
-    make_image(traceabilities, true);
+    TraceabilityImage* image = make_image(traceabilities, true);
+    image->getData();
     //show_image();
     //testFSM();
 
