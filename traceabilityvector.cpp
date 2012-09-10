@@ -48,6 +48,12 @@ void TraceabilityVector::push_back (Traceability &traceability ) {
     assert(traceability.getWorkstationName().size()>0);
 
     vector<Traceability>::push_back(traceability);
+    traceability_by_orderName.insert(make_pair(
+                                               traceability.getOrderName(),
+                                               &traceability
+                                               )
+                                     );
+
     makeStatistics(traceability);
 }
 
@@ -234,7 +240,7 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
             }
             previousTraceability=&(*it);
         }
-        /*if(cumulate) {
+        if(cumulate) {
             for (long i=cursor; i<position+V_RATIO; i++) {
                 for(long j=0; j<IWidth; j++) {
                     fData[i][j][0]=fData[cursor][j][0];  // rouge
@@ -242,7 +248,7 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
                     fData[i][j][2]=fData[cursor][j][2];   // bleu
                 }
             }
-        }*/
+        }
         position+=V_RATIO;
     }
 

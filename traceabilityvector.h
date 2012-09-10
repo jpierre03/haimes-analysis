@@ -7,6 +7,7 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <stdexcept>
@@ -34,6 +35,9 @@ public:
     void sortByWorkstationName_AND_OrderName() ;
     string graphvizWorkstationOriented(void);
     void image(const bool cumulate, const string ppmOutputFileName);
+
+    multimap<string, Traceability*> traceability_by_orderName;
+    multimap<string, Traceability*> traceability_by_workstationName;
 private:
     double _minInputTime;
     double _maxInputTime;

@@ -26,7 +26,8 @@ TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
             }
         }
         if(itemnum==MAX_ITEMS-1) {
-            Traceability t(
+            Traceability *t;
+            t= new Traceability(
                 items[1],
                 items[2],
                 items[3],
@@ -34,7 +35,7 @@ TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
                 items[5],
                 items[6],
                 items[7]);
-            traceabilities.push_back(t);
+            traceabilities.push_back(*t);
         }
     }
     return traceabilities;

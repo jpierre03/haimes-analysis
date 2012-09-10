@@ -79,3 +79,26 @@ double Traceability::getEndWorkingTime(void) {
 string Traceability::getOrderName(void) {
     return _orderName;
 }
+
+
+string Traceability::toString(void){
+    return " [ "+getOrderName() + " | " + getWorkstationName() + " ] " ;
+}
+
+void Traceability::toString(ostream &out){
+    out << toString();
+}
+
+void Traceability::toString(string &str){
+    str = str + toString();
+}
+
+ostream &operator<<( ostream &out, Traceability &p ){
+	p.toString(out) ;
+	return out;
+}
+
+string &operator+( string &str, Traceability &p ){
+	p.toString(str) ;
+	return str;
+}

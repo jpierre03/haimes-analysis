@@ -25,6 +25,11 @@ class Traceability {
         double getStartWorkingTime(void) ;
         double getEndWorkingTime(void);
         string getOrderName(void);
+        // Streams
+        string toString(void);
+        void toString(ostream &out);
+        void toString(string &str);
+
     private:
         string _orderName;
         string _manufacturingStep;
@@ -34,5 +39,8 @@ class Traceability {
         double _endWorkingTime;
         double _outputTime;
 };
+
+ostream &operator<<(ostream &out, Traceability &p);
+string &operator+(string str, Traceability &p);
 
 #endif // TRACEABILITY_H
