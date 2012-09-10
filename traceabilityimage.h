@@ -21,15 +21,20 @@ public:
     TraceabilityImage(TraceabilityVector traceabilities);
     virtual ~TraceabilityImage();
     void image(const bool cumulate, const string ppmOutputFileName);
+    char ***getData(void){return fData;};
+    unsigned long getHeight(void){return _IHeight;};
+    unsigned long getWidth(void){return _IWidth;};
 
 protected:
 private:
     TraceabilityVector _traceabilities;
     char ***fData;
+    unsigned long _IHeight;
+    unsigned long _IWidth;
 
-    void allocate_fData(const long IHeight, const long IWidth);
-    void initialize_fData(const long IHeight, const long IWidth);
-    void delete_fData(const long IHeight, const long IWidth);
+    void allocate_fData(const unsigned long IHeight, const unsigned long IWidth);
+    void initialize_fData();
+    void delete_fData();
 };
 
 #endif // TRACEABILITYIMAGE_H

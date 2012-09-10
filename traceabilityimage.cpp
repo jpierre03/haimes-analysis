@@ -8,23 +8,26 @@ TraceabilityImage::~TraceabilityImage() {
     //dtor
 }
 
-void TraceabilityImage::allocate_fData(const long IHeight, const long IWidth) {
+void TraceabilityImage::allocate_fData(const unsigned long IHeight, const unsigned long IWidth) {
     fData= new char** [IHeight];
+    _IHeight=IHeight;
+    _IWidth=IWidth;
+
     cout<<"Allocation de mémoire pour stocker l'image"<<endl;
-    for(long i=0; i<IHeight; i++) {
+    for(unsigned long i=0; i<IHeight; i++) {
         fData[i]= new char* [IWidth];
 
-        for(long j=0; j<IWidth; j++) {
+        for(unsigned long j=0; j<IWidth; j++) {
             fData[i][j]= new char[3];
         }
     }
     cout<<"Fin--Allocation de mémoire pour stocker l'image"<<endl;
 }
 
-void TraceabilityImage::initialize_fData(const long IHeight, const long IWidth) {
+void TraceabilityImage::initialize_fData() {
     // Init ALL Matrix
-    for (long i=0; i<IHeight; i++) {
-        for(long j=0; j<IWidth; j++) {
+    for (unsigned long i=0; i<_IHeight; i++) {
+        for(unsigned long j=0; j<_IWidth; j++) {
             fData[i][j][0]=(char)255;
             fData[i][j][1]=(char)255;
             fData[i][j][2]=(char)255;
@@ -32,9 +35,9 @@ void TraceabilityImage::initialize_fData(const long IHeight, const long IWidth) 
     }
 }
 
-void TraceabilityImage::delete_fData(const long IHeight, const long IWidth) {
-    for(long i=0; i<IHeight; i++) {
-        for(long j=0; j<IWidth; j++) {
+void TraceabilityImage::delete_fData() {
+    for(unsigned long i=0; i<_IHeight; i++) {
+        for(unsigned long j=0; j<_IWidth; j++) {
             delete[] fData[i][j];
         }
         delete[] fData[i];
@@ -51,7 +54,7 @@ void TraceabilityImage::image(const bool cumulate=false, const string ppmOutputF
     //char fData[IHeight][IWidth][3];
 
     allocate_fData(IHeight, IWidth);
-    initialize_fData(IHeight, IWidth);
+    initialize_fData();
 
     // Time Line -- TOP
     for (long i=0; i<TIME_LINE_HEIGHT; i++) {
@@ -161,5 +164,5 @@ void TraceabilityImage::image(const bool cumulate=false, const string ppmOutputF
         }
         output.close();
     }
-    delete_fData(IHeight, IWidth);
+    delete_fData();
 }
