@@ -48,14 +48,14 @@ void TraceabilityVector::push_back (Traceability &traceability ) {
     assert(traceability.getWorkstationName().size()>0);
 
     vector<Traceability>::push_back(traceability);
-    traceability_by_orderName.insert(make_pair(
-                                         traceability.getOrderName(),
-                                         &traceability)
-                                    );
-    traceability_by_workstationName.insert(make_pair(
-            traceability.getWorkstationName(),
-            &traceability)
-                                          );
+    _traceabilities_by_orderName.insert(make_pair(
+                                            traceability.getOrderName(),
+                                            &traceability)
+                                       );
+    _traceabilities_by_workstationName.insert(make_pair(
+                traceability.getWorkstationName(),
+                &traceability)
+                                             );
 
     makeStatistics(traceability);
 }
@@ -281,6 +281,87 @@ void TraceabilityVector::image(const bool cumulate=false, const string ppmOutput
     delete_fData(IHeight, IWidth);
 }
 
+multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_orderName(void) {
+    return _traceabilities_by_orderName;
+}
+multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_workstationName(void) {
+    return _traceabilities_by_workstationName;
+}
+
+multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_orderName(string orderName) {
+    multimap<string, Traceability*> traceabilities;
+    pair<multimap<string, Traceability*>::iterator, multimap<string, Traceability*>::iterator> ppp;
+    multimap<string, Traceability*>::iterator it;
+
+    ppp = getTaceabilities_by_orderName().equal_range(orderName);
+
+    // Loop through range of maps of key ""
+    for (it = ppp.first; it != ppp.second; ++it) {
+        traceabilities.insert(make_pair(
+                                  (*it).second->getOrderName(),
+                                  (*it).second)
+                              );
+    }
+    return traceabilities;
+}
+
+multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_workstationName(string workstationName) {
+    multimap<string, Traceability*> traceabilities;
+    pair<multimap<string, Traceability*>::iterator, multimap<string, Traceability*>::iterator> ppp;
+    multimap<string, Traceability*>::iterator it;
+
+    ppp = getTaceabilities_by_workstationName().equal_range(workstationName);
+
+    // Loop through range of maps of key ""
+    for (it = ppp.first; it != ppp.second; ++it) {
+        traceabilities.insert(make_pair(
+                                  (*it).second->getWorkstationName(),
+                                  (*it).second)
+                              );
+    }
+    return traceabilities;
+}
+
+set<string> TraceabilityVector::getOrderNames(void){
+    vector<Traceability> m= *this;
+    vector<Traceability>::iterator it;
+
+    set<string> result;
+    for( it = m.begin(); it != m.end(); ++it) {
+      result.insert((*it).getOrderName());
+    }
+    return result;
+}
+set<string> TraceabilityVector::getWorkstationNames(void){
+    vector<Traceability> m= *this;
+    vector<Traceability>::iterator it;
+
+    set<string> result;
+    for( it = m.begin(); it != m.end(); ++it) {
+      result.insert((*it).getWorkstationName());
+    }
+    return result;
+}
+
+void TraceabilityVector::show_orderNames(void){
+    set<string>::iterator it;
+    set<string> names=getOrderNames();
+
+    cout << "Order Names" << endl;
+    for( it = names.begin(); it != names.end(); ++it) {
+      cout << "\t"<< (*it) << endl;
+    }
+}
+
+void TraceabilityVector::show_workstationNames(void){
+    set<string>::iterator it;
+    set<string> names=getWorkstationNames();
+
+    cout << "Workstation Names" << endl;
+    for( it = names.begin(); it != names.end(); ++it) {
+      cout << "\t"<< (*it) << endl;
+    }
+}
 
 //private:
 void TraceabilityVector::makeStatistics(Traceability t) {

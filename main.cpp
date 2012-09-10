@@ -154,28 +154,16 @@ void test_multimap(void) {
 }
 
 void test_multimap_traceability(TraceabilityVector &traceabilities) {
-    multimap<string, Traceability*> m=traceabilities.traceability_by_orderName;
-
-    cout << "Number of elements with key order6-0: " << m.count("order6-0") << endl;
-    cout << "Number of elements with key order7-0: " << m.count("order7-0") << endl;
+    multimap<string, Traceability*>::iterator it;
+    //multimap<string, Traceability*> m = traceabilities.getTaceabilities_by_orderName("order6-0");
+    traceabilities.show_orderNames();
+    traceabilities.show_workstationNames();
+    multimap<string, Traceability*> m = traceabilities.getTaceabilities_by_workstationName("M3");
 
     cout << "Elements in map: " << endl;
-    for (multimap<string, Traceability*>::iterator it = m.begin(); it != m.end(); ++it) {
+    for (it = m.begin(); it != m.end(); ++it) {
         cout << "  [" << it->first << ", " << ((Traceability *)(*it).second)->toString() << "]" << endl;
     }
-
-    pair<multimap<string, Traceability*>::iterator, multimap<string, Traceability*>::iterator> ppp;
-
-    // equal_range(b) returns pair<iterator,iterator> representing the range
-    // of element with key b
-    ppp = m.equal_range("order6-0");
-
-    // Loop through range of maps of key "b"
-    cout << endl << "Range of \"order6-0\" elements:" << "(" << m.count("order6-0") << " elements)" << endl;
-    for (multimap<string, Traceability*>::iterator it2 = ppp.first; it2 != ppp.second; ++it2) {
-        cout << "  [" << (*it2).first << ", " << ((Traceability *)(*it2).second)->toString() << "]" << endl;
-    }
-    //m.clear();
 }
 
 int main (int argc, char *argv[]) {
