@@ -15,29 +15,29 @@
 using namespace std;
 
 class Traceability {
-    public:
-        Traceability(string orderName, string manufacturingStep, string workstationName, string inputTime, string startWorkingTime, string endWorkingTime, string outputTime);
-        virtual ~Traceability();
-        void show(void);
-        string getWorkstationName(void);
-        double getInputTime(void);
-        double getOutputTime(void);
-        double getStartWorkingTime(void) ;
-        double getEndWorkingTime(void);
-        string getOrderName(void);
-        // Streams
-        string toString(void);
-        void toString(ostream &out);
-        void toString(string &str);
+public:
+    Traceability(string orderName, string manufacturingStep, string workstationName, string inputTime, string startWorkingTime, string endWorkingTime, string outputTime);
+    virtual ~Traceability();
+    void show(void);
+    string getWorkstationName(void);
+    double getInputTime(void);
+    double getOutputTime(void);
+    double getStartWorkingTime(void) ;
+    double getEndWorkingTime(void);
+    string getOrderName(void);
+    // Streams
+    string toString(void);
+    void toString(ostream &out);
+    void toString(string &str);
 
-    private:
-        string _orderName;
-        string _manufacturingStep;
-        string _workstationName;
-        double _inputTime;
-        double _startWorkingTime;
-        double _endWorkingTime;
-        double _outputTime;
+private:
+    string _orderName;
+    string _manufacturingStep;
+    string _workstationName;
+    double _inputTime;
+    double _startWorkingTime;
+    double _endWorkingTime;
+    double _outputTime;
 };
 
 ostream &operator<<(ostream &out, Traceability &p);

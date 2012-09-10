@@ -29,12 +29,12 @@ inline double convertToDouble(std::string const& s) {
 
 
 Traceability::Traceability(string orderName="DefaultOrderName",
-               string manufacturingStep="-1",
-               string workstationName="DefaultWorkstationName",
-               string inputTime="-1",
-               string startWorkingTime="-1",
-               string endWorkingTime="-1",
-               string outputTime="-1") {
+                           string manufacturingStep="-1",
+                           string workstationName="DefaultWorkstationName",
+                           string inputTime="-1",
+                           string startWorkingTime="-1",
+                           string endWorkingTime="-1",
+                           string outputTime="-1") {
 
     _orderName=orderName;
     _manufacturingStep= manufacturingStep;
@@ -81,24 +81,24 @@ string Traceability::getOrderName(void) {
 }
 
 
-string Traceability::toString(void){
+string Traceability::toString(void) {
     return " [ "+getOrderName() + " | " + getWorkstationName() + " ] " ;
 }
 
-void Traceability::toString(ostream &out){
+void Traceability::toString(ostream &out) {
     out << toString();
 }
 
-void Traceability::toString(string &str){
+void Traceability::toString(string &str) {
     str = str + toString();
 }
 
-ostream &operator<<( ostream &out, Traceability &p ){
-	p.toString(out) ;
-	return out;
+ostream &operator<<( ostream &out, Traceability &p ) {
+    p.toString(out) ;
+    return out;
 }
 
-string &operator+( string &str, Traceability &p ){
-	p.toString(str) ;
-	return str;
+string &operator+( string &str, Traceability &p ) {
+    p.toString(str) ;
+    return str;
 }

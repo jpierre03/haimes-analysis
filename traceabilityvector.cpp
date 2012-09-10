@@ -49,10 +49,13 @@ void TraceabilityVector::push_back (Traceability &traceability ) {
 
     vector<Traceability>::push_back(traceability);
     traceability_by_orderName.insert(make_pair(
-                                               traceability.getOrderName(),
-                                               &traceability
-                                               )
-                                     );
+                                         traceability.getOrderName(),
+                                         &traceability)
+                                    );
+    traceability_by_workstationName.insert(make_pair(
+            traceability.getWorkstationName(),
+            &traceability)
+                                          );
 
     makeStatistics(traceability);
 }
