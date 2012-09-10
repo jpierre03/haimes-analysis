@@ -2,6 +2,7 @@
 #define TRACEABILITYTOOLBOX_H
 
 #include "traceabilityvector.h"
+#include "traceabilityimage.h"
 
 TraceabilityVector import_traceabilities_from_CSV_file(const string fileName);
 void showStatistics(TraceabilityVector & traceabilities);

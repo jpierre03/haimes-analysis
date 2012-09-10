@@ -80,7 +80,8 @@ void make_image(TraceabilityVector & traceabilities, const bool isCumulate, cons
     //traceabilities.sortByWorkstationName();
     traceabilities.sortByWorkstationName_AND_OrderName();
     //traceabilities.image();
-    traceabilities.image(isCumulate, output_ppm_file);
+    TraceabilityImage image(traceabilities);
+    image.image(isCumulate, output_ppm_file);
 }
 
 void show_image() {
