@@ -31,7 +31,6 @@ TraceabilityVector::~TraceabilityVector() {
     cout << "TraceabilityVector::~TraceabilityVector destructor" << endl;
 }
 
-
 void TraceabilityVector::show(void) {
     for (TraceabilityVector::iterator it = begin(); it!=end(); ++it) {
         (*it).show();
@@ -48,14 +47,11 @@ void TraceabilityVector::push_back (Traceability &traceability ) {
     assert(traceability.getWorkstationName().size()>0);
 
     vector<Traceability>::push_back(traceability);
-    _traceabilities_by_orderName.insert(make_pair(
-                                            traceability.getOrderName(),
-                                            &traceability)
-                                       );
-    _traceabilities_by_workstationName.insert(make_pair(
-                traceability.getWorkstationName(),
-                &traceability)
-                                             );
+    _traceabilities_by_orderName.insert(
+        make_pair(traceability.getOrderName(),&traceability));
+
+    _traceabilities_by_workstationName.insert(
+        make_pair(traceability.getWorkstationName(),&traceability));
 
     makeStatistics(traceability);
 }
@@ -85,10 +81,9 @@ double TraceabilityVector::maxWorkingTime() {
 }
 
 void TraceabilityVector::sortByOrderName() {
-    stable_sort(begin(), end(), [](Traceability a, Traceability b) {
+    stable_sort(begin(), end(),[](Traceability a, Traceability b) {
         return a.getOrderName() > b.getOrderName();
     });
-
 }
 
 void TraceabilityVector::sortByWorkstationName() {
