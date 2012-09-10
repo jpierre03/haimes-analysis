@@ -42,14 +42,15 @@ TraceabilityVector import_traceabilities_from_CSV_file(const string fileName) {
 }
 
 void showStatistics(TraceabilityVector & traceabilities) {
-    cout << "minInputTime: " <<traceabilities.minInputTime() << endl;
-    cout << "maxInputTime: " <<traceabilities.maxInputTime() << endl;
+    cout << "Traceability Statistics"<< endl;
+    cout << "\t" << "minInputTime:   " <<traceabilities.minInputTime() << endl;
+    cout << "\t" << "maxInputTime:   " <<traceabilities.maxInputTime() << endl;
     cout << endl;
-    cout << "minWorkingTime: " <<traceabilities.minWorkingTime() << endl;
-    cout << "maxWorkingTime: " <<traceabilities.maxWorkingTime() << endl;
+    cout << "\t" << "minWorkingTime: " <<traceabilities.minWorkingTime() << endl;
+    cout << "\t" << "maxWorkingTime: " <<traceabilities.maxWorkingTime() << endl;
     cout << endl;
-    cout << "minOutputTime: " <<traceabilities.minOutputTime() << endl;
-    cout << "maxOutputTime: " <<traceabilities.maxOutputTime() << endl;
+    cout << "\t" << "minOutputTime: " <<traceabilities.minOutputTime() << endl;
+    cout << "\t" << "maxOutputTime: " <<traceabilities.maxOutputTime() << endl;
     cout << endl;
 
     assert(traceabilities.minInputTime()>=0);

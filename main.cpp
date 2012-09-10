@@ -160,9 +160,9 @@ void test_multimap_traceability(TraceabilityVector &traceabilities) {
     traceabilities.show_workstationNames();
     multimap<string, Traceability*> m = traceabilities.getTaceabilities_by_workstationName("M3");
 
-    cout << "Elements in map: " << endl;
+    cout << "Elements in map: " << "(" << m.size() << ")"<< endl;
     for (it = m.begin(); it != m.end(); ++it) {
-        cout << "  [" << it->first << ", " << ((Traceability *)(*it).second)->toString() << "]" << endl;
+        cout << " \t[" << it->first << ", " << ((Traceability *)(*it).second)->toString() << "]" << endl;
     }
 }
 
