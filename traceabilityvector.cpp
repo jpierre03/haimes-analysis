@@ -300,7 +300,7 @@ multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_orderNam
         traceabilities.insert(make_pair(
                                   (*it).second->getOrderName(),
                                   (*it).second)
-                              );
+                             );
     }
     return traceabilities;
 }
@@ -317,49 +317,49 @@ multimap<string, Traceability*> TraceabilityVector::getTaceabilities_by_workstat
         traceabilities.insert(make_pair(
                                   (*it).second->getWorkstationName(),
                                   (*it).second)
-                              );
+                             );
     }
     return traceabilities;
 }
 
-set<string> TraceabilityVector::getOrderNames(void){
+set<string> TraceabilityVector::getOrderNames(void) {
     vector<Traceability> m= *this;
     vector<Traceability>::iterator it;
 
     set<string> result;
     for( it = m.begin(); it != m.end(); ++it) {
-      result.insert((*it).getOrderName());
+        result.insert((*it).getOrderName());
     }
     return result;
 }
-set<string> TraceabilityVector::getWorkstationNames(void){
+set<string> TraceabilityVector::getWorkstationNames(void) {
     vector<Traceability> m= *this;
     vector<Traceability>::iterator it;
 
     set<string> result;
     for( it = m.begin(); it != m.end(); ++it) {
-      result.insert((*it).getWorkstationName());
+        result.insert((*it).getWorkstationName());
     }
     return result;
 }
 
-void TraceabilityVector::show_orderNames(void){
+void TraceabilityVector::show_orderNames(void) {
     set<string>::iterator it;
     set<string> names=getOrderNames();
 
     cout << "Order Names" << endl;
     for( it = names.begin(); it != names.end(); ++it) {
-      cout << "\t"<< (*it) << endl;
+        cout << "\t"<< (*it) << endl;
     }
 }
 
-void TraceabilityVector::show_workstationNames(void){
+void TraceabilityVector::show_workstationNames(void) {
     set<string>::iterator it;
     set<string> names=getWorkstationNames();
 
     cout << "Workstation Names" << endl;
     for( it = names.begin(); it != names.end(); ++it) {
-      cout << "\t"<< (*it) << endl;
+        cout << "\t"<< (*it) << endl;
     }
 }
 
