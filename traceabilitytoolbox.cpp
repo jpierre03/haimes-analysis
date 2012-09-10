@@ -51,7 +51,6 @@ void showStatistics(TraceabilityVector & traceabilities) {
     cout << endl;
     cout << "\t" << "minOutputTime: " <<traceabilities.minOutputTime() << endl;
     cout << "\t" << "maxOutputTime: " <<traceabilities.maxOutputTime() << endl;
-    cout << endl;
 
     assert(traceabilities.minInputTime()>=0);
     assert(traceabilities.maxInputTime()>0);

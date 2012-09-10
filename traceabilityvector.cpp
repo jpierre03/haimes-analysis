@@ -348,9 +348,11 @@ void TraceabilityVector::show_orderNames(void) {
     set<string> names=getOrderNames();
 
     cout << "Order Names" << endl;
+    cout << "\t";
     for( it = names.begin(); it != names.end(); ++it) {
-        cout << "\t"<< (*it) << endl;
+        cout << (*it) << "  ";
     }
+    cout << endl;
 }
 
 void TraceabilityVector::show_workstationNames(void) {
@@ -358,9 +360,11 @@ void TraceabilityVector::show_workstationNames(void) {
     set<string> names=getWorkstationNames();
 
     cout << "Workstation Names" << endl;
+    cout << "\t";
     for( it = names.begin(); it != names.end(); ++it) {
-        cout << "\t"<< (*it) << endl;
+        cout << (*it) << "  ";
     }
+    cout << endl;
 }
 
 //private:
