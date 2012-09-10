@@ -417,6 +417,7 @@ void TraceabilityVector::allocate_fData(const long IHeight, const long IWidth) {
     }
     cout<<"Fin--Allocation de mémoire pour stocker l'image"<<endl;
 }
+
 void TraceabilityVector::initialize_fData(const long IHeight, const long IWidth) {
     // Init ALL Matrix
     for (long i=0; i<IHeight; i++) {
@@ -427,6 +428,7 @@ void TraceabilityVector::initialize_fData(const long IHeight, const long IWidth)
         }
     }
 }
+
 void TraceabilityVector::delete_fData(const long IHeight, const long IWidth) {
     for(long i=0; i<IHeight; i++) {
         for(long j=0; j<IWidth; j++) {
