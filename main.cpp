@@ -16,6 +16,10 @@
 
 using namespace std;
 
+void testFSM(void);
+void test_multimap(void);
+void test_multimap_traceability(TraceabilityVector &traceabilities);
+
 template <class T>
 inline std::string to_string (const T& t) {
     std::stringstream ss;
