@@ -51,6 +51,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="traceability.cpp" />
 		<Unit filename="traceability.h" />
+		<Unit filename="traceabilityimage.cpp" />
+		<Unit filename="traceabilityimage.h" />
 		<Unit filename="traceabilitytoolbox.cpp" />
 		<Unit filename="traceabilitytoolbox.h" />
 		<Unit filename="traceabilityvector.cpp" />
