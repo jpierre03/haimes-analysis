@@ -1,6 +1,7 @@
 # Source : http://linux.leunen.com/?p=21
-CC := g++
-CFLAGS := -Wall
+CC := c++
+CFLAGS := -Wall -std=c++11
+#CFLAGS :=
 EXEC_NAME := my.bin
 INCLUDES =
 LIBS =
