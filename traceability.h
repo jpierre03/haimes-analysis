@@ -16,7 +16,13 @@ using namespace std;
 
 class Traceability {
 public:
-    Traceability(string orderName, string manufacturingStep, string workstationName, string inputTime, string startWorkingTime, string endWorkingTime, string outputTime);
+	Traceability(string orderName="DefaultOrderName",
+                           string manufacturingStep="-1",
+                           string workstationName="DefaultWorkstationName",
+                           string inputTime="-1",
+                           string startWorkingTime="-1",
+                           string endWorkingTime="-1",
+                           string outputTime="-1");
     virtual ~Traceability();
     void show(void);
     string getWorkstationName(void);

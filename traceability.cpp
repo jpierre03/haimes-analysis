@@ -28,13 +28,13 @@ inline double convertToDouble(std::string const& s) {
 
 
 
-Traceability::Traceability(string orderName="DefaultOrderName",
-                           string manufacturingStep="-1",
-                           string workstationName="DefaultWorkstationName",
-                           string inputTime="-1",
-                           string startWorkingTime="-1",
-                           string endWorkingTime="-1",
-                           string outputTime="-1") {
+Traceability::Traceability(string orderName,
+                           string manufacturingStep,
+                           string workstationName,
+                           string inputTime,
+                           string startWorkingTime,
+                           string endWorkingTime,
+                           string outputTime) {
 
     _orderName=orderName;
     _manufacturingStep= manufacturingStep;
