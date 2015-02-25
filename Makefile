@@ -32,3 +32,7 @@ $(EXEC_NAME) : $(OBJ_FILES)
 
 install :
 	cp $(EXEC_NAME) $(INSTALL_DIR)
+
+run:	$(EXEC_NAME)
+	./$(EXEC_NAME)
+
